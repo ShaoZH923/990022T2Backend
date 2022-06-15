@@ -4,7 +4,10 @@
   "description": "Backend Server for UNSW COMP9900 22T2 glhf",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/www",
+    "dev": "./node_modules/.bin/nodemon bin/www",
+    "prd": "pm2 start bin/www",
+    "test": "mocha ./test/*.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,18 @@
   },
   "homepage": "https://github.com/ShaoZH923/990022T2Backend#readme",
   "dependencies": {
-    "koa": "^2.13.4"
+    "babel-register": "^6.26.0",
+    "debug": "^4.3.4",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-cors": "^0.0.16",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-onerror": "^4.2.0",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
+    "koa-views": "^8.0.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "name": "990022t2backend",
+  "version": "1.0.0",
+  "description": "Backend Server for UNSW COMP9900 22T2 glhf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaoZH923/990022T2Backend.git"
+  },
+  "author": "Ziheng Shao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShaoZH923/990022T2Backend/issues"
+  },
+  "homepage": "https://github.com/ShaoZH923/990022T2Backend#readme",
+  "dependencies": {
+    "koa": "^2.13.4"
+  }
+}

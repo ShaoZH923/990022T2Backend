@@ -3,10 +3,10 @@ module.exports = {
     port: 700,
     mysql: {
         aws: {
-            host: 'unsw9900mysql.ciyyguazhvvt.ap-east-1.rds.amazonaws.com',
+            host: 'rm-bp1unw7c36td50v149o.mysql.rds.aliyuncs.com',
             username: 'root',
             database: 'unsw9900db',
-            password: 'unsw9900',
+            password: 'UNSW9900db',
             waitForConnections: true,
             connectionLimit: 10,
             queueLimit: 0

@@ -1,5 +1,6 @@
 const baseController = require("./baseController");
 const userAccounts = require("../model/user_accounts");
+const { user_login } = require("../model/entity/user_login");
 
 class accountController extends baseController {
     async signup(content) {
@@ -98,12 +99,59 @@ class accountController extends baseController {
         let confirmnewpassword = content.confirmnewpassword;
 
         // 1. Check email exists
+        let have_email = await userAccounts.checkEmail(content);
+        console.log("Have Email: ", have_email);
 
-        // 2. Change old password is correct
+        if (have_email === false) {
+            // no such email exists
+            console.log("Email does not exist");
+            let result = {
+                "code": 201,
+                "err_message": "Email does not exist"
+            };
+            return result;
+        }
+
+        // 2. Check old password is correct
+        let user_password = await userAccounts.get_login(email);
+
+        if (user_password === oldpassword){
+            // user provided password is correct
+        }
+        else {
+            let result = {
+                "code": 202,
+                "err_message": "Incorrect Old Password"
+            };
+            return result;
+        }
 
         // 3. Check if newpassword and confirmnewpassword are the same
+        if (newpassword === confirmnewpassword){
+            // normal
+        }
+        else {
+            let result = {
+                "code": 203,
+                "err_message": "Password Confirmation not the same as new Password"
+            }
+            return result;
+        }
 
         // 4. Change password
+        await user_login.update({
+            password: newpassword
+        }, {
+            where:{
+                email: email
+            }
+        });
+
+        let result = {
+            "code": 200
+        }
+
+        return result;
 
     }
 }

@@ -25,6 +25,23 @@ exports.checkDuplicate = async function(content) {
     return '0'
 }
 
+exports.checkEmail = async function(content) {
+    let email = content.email;
+    
+    let list = await user_login.findAll({
+        where: {
+            email: email
+        }
+    });
+    if (list.length === 1){
+        // normal, email exists
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 exports.addUser = async function(content) {
     let email = content.email;
     let username = content.username;

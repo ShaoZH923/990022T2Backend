@@ -25,6 +25,20 @@ exports.checkDuplicate = async function(content) {
     return '0'
 }
 
+exports.addUser = async function(content) {
+    let email = content.email;
+    let username = content.username;
+    let password = content.password;
+    let accounttype = content.accounttype;
+
+    user_login.bulkCreate([{
+        email: email,
+        username: username,
+        password: password,
+        accounttype: accounttype
+    }])
+}
+
 exports.get_login = async function(input_msg) {
     let email = input_msg
 

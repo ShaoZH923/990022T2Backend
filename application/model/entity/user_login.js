@@ -25,7 +25,7 @@ const user_login = sequelize.define('user_login', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    accountType: {
+    accounttype: {
         type: Sequelize.INTEGER,
         allowNull: false,
     }

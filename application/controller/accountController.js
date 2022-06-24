@@ -6,6 +6,20 @@ class accountController extends baseController {
         // sign up
         console.log("accountController.signup: ", content);
 
+        let password = content.password;
+        let passwordconfirm = content.passwordconfirm;
+
+        if (password === passwordconfirm){
+            // do nothing
+        }
+        else {
+            let result = {
+                "code": 203,
+                "err_message": "Password Confirm does not match"
+            }
+            return result;
+        }
+
         let duplicates = await userAccounts.checkDuplicate(content);
         console.log("duplicates: ", duplicates);
 

@@ -24,3 +24,20 @@ exports.checkDuplicate = async function(content) {
     }
     return '0'
 }
+
+exports.get_login = async function(input_msg) {
+    let email = input_msg
+
+    let list = await user_login.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    if (list === null){
+        // no user found
+        return -1
+    }
+
+    return list.password;
+}

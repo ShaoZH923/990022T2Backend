@@ -42,8 +42,8 @@ const user_signup = require('./routes/user_signup');
 app.use(user_signup.routes(), user_signup.allowedMethods());
 
 // log in
-// const user_login = require('./routes/user_login');
-// app.use(user_login.routes(), user_login.allowedMethods());
+const user_login = require('./routes/user_login');
+app.use(user_login.routes(), user_login.allowedMethods());
 
 // change password
 // const user_changepass = require('./routes/user_changepass');

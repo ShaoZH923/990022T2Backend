@@ -11,3 +11,15 @@ exports.signup = async(ctx, next) => {
 
     await next();
 }
+
+exports.login = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.login(body);
+    ctx.body = result;
+
+    console.log("Account Login Operation: ", result);
+
+    await next();
+}

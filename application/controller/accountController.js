@@ -36,6 +36,45 @@ class accountController extends baseController {
         return result;
         
     }
+
+    async login(content) {
+        // login
+        console.log("acccountController.signup: ", content);
+
+        // check email
+        let email = content.email
+        let password = content.password
+
+        // aquire user login information from Database
+        let result = await userAccounts.get_login(email)
+
+        if (result === -1){
+            // no user exists
+            result = {
+                "code": 201,
+                "err-message": "Email does not exist"
+            }
+            return result;
+        }
+
+        // result now contains password
+        if (password === result){
+            console.log("log in successful");
+            result = {
+                "code": 200
+            }
+            return result;
+        }
+        else {
+            // wrong password
+            console.log("Incorrect password");
+            result = {
+                "code": 202,
+                "err-message": "Incorrect Password"
+            }
+            return result;
+        }
+    }
 }
 
 module.exports = accountController

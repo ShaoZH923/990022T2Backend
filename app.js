@@ -46,8 +46,8 @@ const user_login = require('./routes/user_login');
 app.use(user_login.routes(), user_login.allowedMethods());
 
 // change password
-// const user_changepass = require('./routes/user_changepass');
-// app.use(user_changepass.routes(), user_changepass.allowedMethods())
+const user_changepass = require('./routes/user_changepass');
+app.use(user_changepass.routes(), user_changepass.allowedMethods())
 
 
 // error-handling

@@ -89,6 +89,23 @@ class accountController extends baseController {
             return result;
         }
     }
+
+
+    async changepass(content){
+        let email = content.email;
+        let oldpassword = content.oldpassword;
+        let newpassword = content.newpassword;
+        let confirmnewpassword = content.confirmnewpassword;
+
+        // 1. Check email exists
+
+        // 2. Change old password is correct
+
+        // 3. Check if newpassword and confirmnewpassword are the same
+
+        // 4. Change password
+
+    }
 }
 
 module.exports = accountController

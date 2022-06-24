@@ -23,3 +23,15 @@ exports.login = async(ctx, next) => {
 
     await next();
 }
+
+exports.changepass = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.changepass(body);
+    ctx.body = result;
+
+    console.log("Change Password Operation: ", result);
+
+    await next();
+}

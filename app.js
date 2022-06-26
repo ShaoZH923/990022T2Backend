@@ -65,6 +65,10 @@ app.use(get_ingredients.routes(), get_ingredients.allowedMethods());
 const get_recipes = require('./routes/get_recipes');
 app.use(get_recipes.routes(), get_recipes.allowedMethods());
 
+// view recipe
+const view_recipe = require('./routes/view_recipe');
+app.use(view_recipe.routes(), view_recipe.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

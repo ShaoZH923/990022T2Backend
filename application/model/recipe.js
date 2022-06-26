@@ -1,6 +1,7 @@
 // add recipes into db
 import { recipe } from "./entity/recipe"
 import { ingredients } from "./entity/ingredients"
+import recipeController from "../controller/recipeController";
 
 // user uploads new recipe
 exports.add_recipe = async function(content) {
@@ -23,4 +24,13 @@ exports.get_recipes = async function(){
     })
     console.log(result);
     return result;
+}
+
+exports.view_recipe = async function(rid){
+    let result = await recipe.findOne({
+        where: {
+            rid: rid
+        }
+    })
+    return result.dataValues;
 }

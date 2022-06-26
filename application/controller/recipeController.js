@@ -37,6 +37,17 @@ class recipeController extends baseController {
             "recipes": recipes_arr
         });
     }
+
+    async view_recipe(content){
+        let rid = content.rid;
+
+        let recipe = await recipe_model.view_recipe(rid);
+
+        return ({
+            "code": 200,
+            "recipe": recipe
+        })
+    }
 }
 
 module.exports = recipeController

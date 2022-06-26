@@ -1,5 +1,6 @@
 const baseController = require("./baseController");
 const userAccounts = require("../model/user_accounts");
+const userProfile = require("../model/user_profile");
 const { user_login } = require("../model/entity/user_login");
 
 class accountController extends baseController {
@@ -44,6 +45,9 @@ class accountController extends baseController {
         }
 
         userAccounts.addUser(content);
+
+        // create user profile
+        userProfile.add_profile(content);
 
         let result = {
             "code": 200

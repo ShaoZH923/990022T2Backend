@@ -47,8 +47,15 @@ app.use(user_login.routes(), user_login.allowedMethods());
 
 // change password
 const user_changepass = require('./routes/user_changepass');
-app.use(user_changepass.routes(), user_changepass.allowedMethods())
+app.use(user_changepass.routes(), user_changepass.allowedMethods());
 
+// Add bannedingredients
+const user_addbannedingredients = require('./routes/user_addbannedingredients');
+app.use(user_addbannedingredients.routes(), user_addbannedingredients.allowedMethods());
+
+// Removve bannedingredients
+const user_removebannedingredients = require('./routes/user_removebannedingredients');
+app.use(user_removebannedingredients.routes(), user_removebannedingredients.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {

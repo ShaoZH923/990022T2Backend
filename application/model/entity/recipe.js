@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../db');
 
-const ingredients = sequelize.define('ingredients', {
+const recipe = sequelize.define('recipe', {
     rid: {
         type: Sequelize.INTEGER,
         primaryKey: true,

@@ -18,9 +18,9 @@ exports.add_recipe = async function(content) {
 }
 
 // get all recipes
-exports.get_recipe = async function(){
-    result = await recipe.findAll([{
-    }])
+exports.get_recipes = async function(){
+    let result = await recipe.findAll({
+    })
     console.log(result);
-    // return result;
+    return result;
 }

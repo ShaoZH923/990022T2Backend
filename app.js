@@ -61,6 +61,10 @@ app.use(user_removebannedingredients.routes(), user_removebannedingredients.allo
 const get_ingredients = require('./routes/get_ingredients');
 app.use(get_ingredients.routes(), get_ingredients.allowedMethods());
 
+// get all recipes
+const get_recipes = require('./routes/get_recipes');
+app.use(get_recipes.routes(), get_recipes.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

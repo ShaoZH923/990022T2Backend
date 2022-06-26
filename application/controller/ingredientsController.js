@@ -14,7 +14,6 @@ class ingredientsController extends baseController {
 
         // get all ingredients
         let ingredients_list = await ingredients_model.get_ingredients();
-        let ingredients = ingredients_list.dataValues;
         
         let n = ingredients_list.length
         let result = []

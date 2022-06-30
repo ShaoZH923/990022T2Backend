@@ -1,7 +1,7 @@
 require('babel-register');
 
 const user_accounts = require('../application/model/user_accounts');
-let server = require("../app.js").listen(80);
+let server = require("../app.js").listen(8002);
 let request = require("supertest");
 let assert = require("assert");
 
@@ -46,7 +46,7 @@ const wrong_email_2 = {
 }
 
 // test 1, login with correct credential
-it('login with correct credential', function(done) {
+it('login with correct credential 1', function(done) {
     setTimeout(function() {
         request(server)
             .post('/reciperecommend/account/login')
@@ -62,7 +62,7 @@ it('login with correct credential', function(done) {
 })
 
 // test 2, login with correct credential
-it('login with correct credential', function(done) {
+it('login with correct credential 2', function(done) {
     setTimeout(function() {
         request(server)
             .post('/reciperecommend/account/login')
@@ -74,11 +74,11 @@ it('login with correct credential', function(done) {
                 assert.equal(res.body.code, 200)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 100, 'funky');
 })
 
 // test 3, login with correct credential
-it('login with correct credential', function(done) {
+it('login with correct credential 3', function(done) {
     setTimeout(function() {
         request(server)
             .post('/reciperecommend/account/login')
@@ -90,7 +90,7 @@ it('login with correct credential', function(done) {
                 assert.equal(res.body.code, 200)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 150, 'funky');
 })
 
 // test 4, login with wrong password
@@ -106,7 +106,7 @@ it('login with wrong password', function(done) {
                 assert.equal(res.body.code, 202)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 200, 'funky');
 })
 
 // test 5, login with wrong password
@@ -122,7 +122,7 @@ it('login with wrong password', function(done) {
                 assert.equal(res.body.code, 202)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 250, 'funky');
 })
 
 // test 6, login with wrong password
@@ -138,7 +138,7 @@ it('login with wrong password', function(done) {
                 assert.equal(res.body.code, 202)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 300, 'funky');
 })
 
 // test 7, login with wrong email
@@ -154,7 +154,7 @@ it('login with wrong password', function(done) {
                 assert.equal(res.body.code, 201)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 350, 'funky');
 })
 
 // test 8, login with wrong email
@@ -170,5 +170,5 @@ it('login with wrong password', function(done) {
                 assert.equal(res.body.code, 201)
             })
             .end(done)
-    }, 50, 'funky');
+    }, 400, 'funky');
 })

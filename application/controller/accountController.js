@@ -79,8 +79,11 @@ class accountController extends baseController {
         // result now contains password
         if (password === result){
             console.log("log in successful");
+            let userinfo = await userAccounts.get_userinfo(email)
             result = {
-                "code": 200
+                "code": 200,
+                "email": userinfo.email,
+                "username": userinfo.username
             }
             return result;
         }

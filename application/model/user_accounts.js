@@ -51,8 +51,7 @@ exports.addUser = async function(content) {
     user_login.bulkCreate([{
         email: email,
         username: username,
-        password: password,
-        accounttype: accounttype
+        password: password
     }])
 }
 
@@ -71,4 +70,19 @@ exports.get_login = async function(input_msg) {
     }
 
     return list.password;
+}
+
+exports.get_userinfo = async function(email){
+    let list = await user_login.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    let result = {
+        "email": list.email,
+        "username": list.username
+    }
+
+    return result
 }

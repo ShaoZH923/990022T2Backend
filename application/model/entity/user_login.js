@@ -24,10 +24,6 @@ const user_login = sequelize.define('user_login', {
     password: {
         type: Sequelize.STRING,
         allowNull: false,
-    },
-    accounttype: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
     }
 }, {
     freezeTableName: true

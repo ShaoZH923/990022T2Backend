@@ -80,6 +80,7 @@ exports.get_userinfo = async function(email){
     })
 
     let result = {
+        "uid": list.uid,
         "email": list.email,
         "username": list.username
     }

@@ -3,9 +3,7 @@ import { user_profile } from "./entity/user_profile"
 import { ingredients } from "./entity/ingredients"
 
 // add user_profile
-exports.add_profile = async function(content) {
-    let uid = content.uid;
-
+exports.add_profile = async function(content, uid) {
     await user_profile.bulkCreate([{
         uid: uid,
         bookmark: "{}",

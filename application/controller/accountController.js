@@ -8,6 +8,8 @@ class accountController extends baseController {
         // sign up
         console.log("accountController.signup: ", content);
 
+        let email = content.email
+        let username = content.username
         let password = content.password;
         // let passwordconfirm = content.passwordconfirm;
 
@@ -44,13 +46,18 @@ class accountController extends baseController {
             return result;
         }
 
-        userAccounts.addUser(content);
+        await userAccounts.addUser(content);
+
+        let userinfo = await userAccounts.get_userinfo(email);
+        let userid = userinfo.uid
 
         // create user profile
-        userProfile.add_profile(content);
+        userProfile.add_profile(content, userid);
 
         let result = {
-            "code": 200
+            "code": 200,
+            "email": email,
+            "username": username
         }
         return result;
         

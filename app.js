@@ -53,6 +53,10 @@ app.use(user_changepass.routes(), user_changepass.allowedMethods());
 const get_profile = require('./routes/get_profile');
 app.use(get_profile.routes(), get_profile.allowedMethods());
 
+// update username
+const update_username = require('./routes/update_username');
+app.use(update_username.routes(), update_username.allowedMethods());
+
 // Add bannedingredients
 const user_addbannedingredients = require('./routes/user_addbannedingredients');
 app.use(user_addbannedingredients.routes(), user_addbannedingredients.allowedMethods());

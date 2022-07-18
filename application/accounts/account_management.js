@@ -35,3 +35,15 @@ exports.changepass = async(ctx, next) => {
 
     await next();
 }
+
+exports.updateusername = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.updateusername(body);
+    ctx.body = result;
+
+    console.log("Username updated");
+
+    await next();
+}

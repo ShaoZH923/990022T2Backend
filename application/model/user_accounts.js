@@ -117,3 +117,13 @@ exports.get_username = async function(uid){
 
     return list.username
 }
+
+exports.updateusername = async function(email, newusername){
+    let list = await user_login.update({
+        username:newusername
+    }, {
+        where: {
+            email: email
+        }
+    })
+}

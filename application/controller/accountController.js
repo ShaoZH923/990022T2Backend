@@ -110,7 +110,6 @@ class accountController extends baseController {
         let email = content.email;
         let oldpassword = content.oldpassword;
         let newpassword = content.newpassword;
-        let confirmnewpassword = content.confirmnewpassword;
 
         // 1. Check email exists
         let have_email = await userAccounts.checkEmail(content);
@@ -139,19 +138,6 @@ class accountController extends baseController {
             };
             return result;
         }
-
-        // 3. Check if newpassword and confirmnewpassword are the same
-        if (newpassword === confirmnewpassword){
-            // normal
-        }
-        else {
-            let result = {
-                "code": 203,
-                "err_message": "Password Confirmation not the same as new Password"
-            }
-            return result;
-        }
-
         // 4. Change password
         await user_login.update({
             password: newpassword
@@ -167,6 +153,20 @@ class accountController extends baseController {
 
         return result;
 
+    }
+
+    async updateusername(content){
+        let email = content.email;
+        let newusername = content.newusername;
+
+        await userAccounts.updateusername(email, newusername);
+
+        let result = {
+            "email":email,
+            "username": newusername
+        }
+
+        return result;
     }
 }
 

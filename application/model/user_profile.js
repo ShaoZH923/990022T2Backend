@@ -1,6 +1,7 @@
 // add recipes into db
 import { user_profile } from "./entity/user_profile"
 import { ingredients } from "./entity/ingredients"
+import { NONE } from "sequelize"
 
 // add user_profile
 exports.add_profile = async function(content, uid) {
@@ -12,28 +13,25 @@ exports.add_profile = async function(content, uid) {
 }
 
 // get specific user's profile
-exports.get_profile = async function(content){
-    let uid = content.uid;
-
-    result = await user_profile.findOne([{
+exports.get_profile = async function(uid){
+    let result = await user_profile.findOne({
         where: {
             uid: uid
         }
-    }])
-    console.log(result);
-    return result
+    })
+    return result;
 }
 
 exports.get_bookmark = async function(content){
     let uid = content.uid;
 
-    result = await user_profile.findOne([{
+    result = await user_profile.findOne({
         bookmark: bookmark
     }, {
         where: {
             uid: uid
         }
-    }])
+    })
 
     return result
 }
@@ -44,6 +42,8 @@ exports.get_bannedingredients = async function(uid){
             uid: uid
         }
     })
+
+    console.log("Email:", email, "\tuid:", uid)
 
     return result
 }

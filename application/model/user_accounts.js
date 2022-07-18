@@ -87,3 +87,33 @@ exports.get_userinfo = async function(email){
 
     return result
 }
+
+exports.get_email = async function(uid){
+    let list = await user_login.findOne({
+        where: {
+            uid: uid
+        }
+    })
+
+    return list.email
+}
+
+exports.get_uid = async function(email){
+    let list = await user_login.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    return list.uid
+}
+
+exports.get_username = async function(uid){
+    let list = await user_login.findOne({
+        where: {
+            uid: uid
+        }
+    })
+
+    return list.username
+}

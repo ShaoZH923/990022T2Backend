@@ -1,4 +1,5 @@
 const baseController = require("./baseController");
+const useraccounts_model = require("../model/user_accounts");
 const profile_model = require("../model/user_profile");
 const ingredients_model = require("../model/ingredients");
 const { user_profile } = require("../model/entity/user_profile");
@@ -62,9 +63,27 @@ class profileController extends baseController {
     }
 
     async get_profile(content){
-        profile = await profile_model.get_profile(content);
+        let uid = content.uid
+        let email = content.email
+        if (uid === undefined){            
+            uid = await useraccounts_model.get_uid(email);
+        }
+        else{
+            email = await useraccounts_model.get_email(uid);
+        }
+        let profile = await profile_model.get_profile(uid);
         
-        return profile
+        let username = await useraccounts_model.get_username(uid);
+
+        let result = {
+            uid: uid,
+            email: email,
+            username: username,
+            bookmark: profile.bookmark,
+            bannedingredients: profile.bannedingredients
+        }
+        
+        return result
     }
 
     async get_bookmark(content){

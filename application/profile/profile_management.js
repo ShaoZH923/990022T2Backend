@@ -27,3 +27,17 @@ exports.removebannedingredients = async(ctx, next) => {
 
     await next();
 }
+
+exports.getprofile = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.get_profile(body);
+    ctx.body = result;
+    console.log(result);
+    if (result.code === 200) {
+        console.log("User Profile Aquired");
+    }
+
+    await next();
+}

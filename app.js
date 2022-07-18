@@ -49,6 +49,10 @@ app.use(user_login.routes(), user_login.allowedMethods());
 const user_changepass = require('./routes/user_changepass');
 app.use(user_changepass.routes(), user_changepass.allowedMethods());
 
+// get user profile
+const get_profile = require('./routes/get_profile');
+app.use(get_profile.routes(), get_profile.allowedMethods());
+
 // Add bannedingredients
 const user_addbannedingredients = require('./routes/user_addbannedingredients');
 app.use(user_addbannedingredients.routes(), user_addbannedingredients.allowedMethods());

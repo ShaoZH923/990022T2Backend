@@ -42,9 +42,6 @@ exports.get_bannedingredients = async function(uid){
             uid: uid
         }
     })
-
-    console.log("Email:", email, "\tuid:", uid)
-
     return result
 }
 

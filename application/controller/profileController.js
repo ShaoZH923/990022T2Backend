@@ -66,7 +66,18 @@ class profileController extends baseController {
         let uid = content.uid
         let email = content.email
         if (uid === undefined){            
-            uid = await useraccounts_model.get_uid(email);
+            let profile = await useraccounts_model.get_uid(email);
+            if (profile === null) {
+                // email/uid does not exist
+                let result = {
+                    "code": 201,
+                    "err-message": "email does not exist"
+                }
+                return result;
+            }
+            else {
+                uid = profile.uid;
+            }
         }
         else{
             email = await useraccounts_model.get_email(uid);

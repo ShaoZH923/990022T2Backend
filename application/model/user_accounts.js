@@ -105,7 +105,7 @@ exports.get_uid = async function(email){
         }
     })
 
-    return list.uid
+    return list
 }
 
 exports.get_username = async function(uid){

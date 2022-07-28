@@ -57,6 +57,10 @@ app.use(get_profile.routes(), get_profile.allowedMethods());
 const update_username = require('./routes/update_username');
 app.use(update_username.routes(), update_username.allowedMethods());
 
+// update usertype
+const update_usertype = require('./routes/update_usertype');
+app.use(update_usertype.routes(), update_usertype.allowedMethods());
+
 // Add bannedingredients
 const user_addbannedingredients = require('./routes/user_addbannedingredients');
 app.use(user_addbannedingredients.routes(), user_addbannedingredients.allowedMethods());

@@ -41,3 +41,17 @@ exports.getprofile = async(ctx, next) => {
 
     await next();
 }
+
+exports.update_usertype = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.update_usertype(body);
+    ctx.body = result;
+    console.log(result);
+    if (result.code === 200){
+        console.log("User type changed.");
+    }
+
+    await next();
+}

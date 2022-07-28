@@ -11,7 +11,17 @@ class profileController extends baseController {
         let bannedingredients = content.bannedingredients
         
         // convert name of bannedingredients to ingredent id (iid)
-        let ingredients_added = bannedingredients.split(',')    // array
+        let ingredients_name_added = bannedingredients.split(',')    // array
+
+        
+        let ingredients_added = new Array();
+        let i = 0;
+        let l = ingredients_name_added.length;
+        for (i = 0; i < l; i++){
+            let iname = ingredients_name_added[i];
+            ingredients_added[i] = await ingredients_model.get_iid(iname);
+            // console.log(ingredients_added[i]);
+        }        
 
         // get uid's ingredent list
         let old_ingredients = await profile_model.get_bannedingredients(uid);
@@ -34,7 +44,15 @@ class profileController extends baseController {
         let bannedingredients = content.bannedingredients;
 
         // convert name of bannedingredients to ingredient id (iid)
-        let ingredients_delete = bannedingredients.split(',')    // array
+        let ingredients_name_delete = bannedingredients.split(',')    // array
+
+        let ingredients_delete = new Array();
+        let i = 0;
+        let l = ingredients_name_delete.length;
+        for (i = 0; i < l; i++){
+            let iname = ingredients_name_delete[i];
+            ingredients_delete[i] = await ingredients_model.get_iid(iname);
+        }
 
         // get uid's ingredent list
         let old_ingredients = await profile_model.get_bannedingredients(uid);
@@ -44,10 +62,9 @@ class profileController extends baseController {
         // remove ingredient id from old ingredients list
         let new_ingredients_set = new Set(old_ingredients_array);
 
-        for( var i = 0; i < ingredients_delete.length; i++){
-            let del = ingredients_delete[i];
+        for( i = 0; i < ingredients_delete.length; i++){
+            let del = ingredients_delete[i].toString();
             console.log("del =", del);
-            console.log(typeof(del));
             if (new_ingredients_set.has(del)) {
                 new_ingredients_set.delete(del);
             }
@@ -95,6 +112,38 @@ class profileController extends baseController {
         }
         
         return result
+    }
+
+    async update_usertype(content){
+        let uid = content.uid;
+        let email = content.email;
+        let newtype = content.newtype;
+
+        if (uid === undefined){
+            let profile = await useraccounts_model.get_uid(email);
+            if (profile === null){
+                let result = {
+                    "code": 201,
+                    "err-message": "email does not exist"
+                }
+                return result;
+            }
+            else {
+                uid = profile.uid;
+            }
+        }
+        else{
+            email = await useraccounts_model.get_email(uid);
+        }
+
+        await profile_model.update_usertype(uid, newtype);
+        let result = {
+            "code": 200,
+            "uid": uid,
+            "email": email,
+            "usertype": newtype
+        }
+        return result;
     }
 
     async get_bookmark(content){

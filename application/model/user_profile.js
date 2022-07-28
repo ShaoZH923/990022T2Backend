@@ -63,3 +63,13 @@ exports.update_ingredients = async function(uid, new_ingredients){
 
     return result;
 }
+
+exports.update_usertype = async function(uid, newtype){
+    await user_profile.update({
+        usertype: newtype
+    }, {
+        where: {
+            uid: uid
+        }
+    })
+}

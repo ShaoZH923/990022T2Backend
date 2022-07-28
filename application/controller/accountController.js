@@ -159,6 +159,16 @@ class accountController extends baseController {
         let email = content.email;
         let newusername = content.newusername;
 
+        // check if email exists
+        let list = await userAccounts.get_uid;
+        if (list === null) {
+            let result = {
+                "code": 201,
+                "err-message": "email does not exist!"
+            }
+            return result
+        }
+
         await userAccounts.updateusername(email, newusername);
 
         let result = {

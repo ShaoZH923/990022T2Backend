@@ -15,6 +15,11 @@ const user_profile = sequelize.define('user_profile', {
     bannedingredients: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    usertype: {
+        type: Sequelize.INTEGER,
+        allowNULL: false,
+        default: 0
     }
 }, {
     freezeTableName: true

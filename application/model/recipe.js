@@ -22,7 +22,7 @@ exports.add_recipe = async function(content) {
 exports.get_recipes = async function(){
     let result = await recipe.findAll({
     })
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
@@ -33,4 +33,13 @@ exports.view_recipe = async function(rid){
         }
     })
     return result.dataValues;
+}
+
+exports.search_recipe_name = async function(name){
+    let result = await recipe.findAll({
+        where:{
+            name: ["^[a-zA-Z0-9]*?"+name+"[a-zA-Z0-9]*?$", 'i']
+        }
+    })
+    return result;
 }

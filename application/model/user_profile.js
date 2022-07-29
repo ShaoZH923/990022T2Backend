@@ -64,6 +64,15 @@ exports.update_ingredients = async function(uid, new_ingredients){
     return result;
 }
 
+exports.get_usertype = async function(uid){
+    let result = await user_profile.findOne({
+        where:{
+            uid: uid
+        }
+    })
+    return result.dataValues.usertype;
+}
+
 exports.update_usertype = async function(uid, newtype){
     await user_profile.update({
         usertype: newtype

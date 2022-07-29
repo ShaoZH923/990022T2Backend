@@ -48,6 +48,33 @@ class recipeController extends baseController {
             "recipe": recipe
         })
     }
+
+    async search_recipe_name(content){
+        let uid = content.uid;
+        let email = content.email;
+        let name = content.name;
+        name = name.toLowerCase();
+        let usertype = await profile_model.get_usertype(uid);
+
+        let banned_ingredients = await profile_model.get_bannedingredients(uid);
+        banned_ingredients = banned_ingredients.dataValues.bannedingredients;
+
+        let recipes = await recipe_model.get_recipes()
+        // console.log(recipes)
+        let filtered_recipe = []
+        let n = recipes.length;
+        let count = 0;
+        for (var i = 0; i < n; i++) {
+            let recipe = recipes[i];
+            let rname = recipe.name;
+            rname = rname.toLowerCase();
+            if (rname.includes(name)){
+                filtered_recipe[count] = recipe;
+                count += 1;
+            }
+        }
+        return filtered_recipe;
+    }
 }
 
 module.exports = recipeController

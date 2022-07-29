@@ -13,3 +13,12 @@ exports.get_iid = async function(name){
     })
     return result.iid
 }
+
+exports.get_ingredients_type = async function(iid){
+    let result = await ingredients.findOne({
+        wherer: {
+            iid: iid
+        }
+    })
+    return result.type;
+}

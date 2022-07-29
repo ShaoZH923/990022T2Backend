@@ -123,6 +123,74 @@ class recipeController extends baseController {
         }
         return filtered_recipe;
     }
+
+    async search_recipe_ingredients(content){
+        let uid = content.uid;
+        let email = content.email;
+        if (uid === undefined) {
+            uid = await login_model.get_uid(email);
+            uid = uid.uid;
+        }
+        console.log("uid:", uid)
+        // filter recipe's ingredents based on usertype
+        let usertype = await profile_model.get_usertype(uid);
+        let banned_id_1 = -1;
+        let banned_id_2 = -1;
+        let banned_id_3 = -1;
+        let banned_type_1 = -1;
+        let banned_type_2 = -1;
+        if (usertype === 1){
+            banned_id_1 = 2;
+        }
+        if (usertype === 2){
+            banned_type_1 = 1;
+            banned_type_2 = 3;
+        }
+        let ingredients_str = content.ingredients
+        let ingredients = ingredients_str.split(',');
+        let n = ingredients.length;
+
+        let banned_ingredients = await profile_model.get_bannedingredients(uid);
+        banned_ingredients = banned_ingredients.dataValues.bannedingredients;
+        console.log("banned_ingredients: ", banned_ingredients);
+        banned_ingredients = banned_ingredients.split(',');
+
+        let recipes = await recipe_model.get_recipes()
+        let filtered_recipe = [];
+        let l = recipes.length;
+        let count = 0;
+
+        for (var i = 0; i < l; i++){
+            let recipe = recipes[i];
+            let recipe_ingredients_str = recipe.ingredients;
+            let recipe_ingredients = recipe_ingredients_str.split(',');
+            let recipe_type = recipe.type;
+
+            let ingredients_included = n;
+            let add = true;
+            for (var j = 0; j < ingredients.length; j++) {
+                for (var k = 0; k < l; k++){
+                    if (ingredients[j] === recipe_ingredients[k]) {
+                        ingredients_included -= 1;
+                    }
+                }
+                if (ingredients[j] === banned_id_1 || ingredients[j] === banned_id_2 || ingredients[j] === banned_id_3){
+                    add = false;
+                }
+                let ingred_type = await ingredients_model.get_ingredients_type(ingredients[j]);
+                if (ingred_type === banned_type_1 || ingred_type === banned_type_2) {
+                    add = false;
+                }
+
+                if (add && ingredients_included === 0) {
+                    filtered_recipe[count] = recipe;
+                    count += 1;
+                }
+            }
+        }
+
+        return filtered_recipe;
+    }
 }
 
 module.exports = recipeController

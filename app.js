@@ -85,6 +85,10 @@ app.use(view_recipe.routes(), view_recipe.allowedMethods());
 const search_recipe_name = require('./routes/search_recipe_name');
 app.use(search_recipe_name.routes(), search_recipe_name.allowedMethods());
 
+// search recipe using ingredients
+const search_recipe_ingredients = require('./routes/search_recipe_ingredients');
+app.use(search_recipe_ingredients.routes(), search_recipe_ingredients.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

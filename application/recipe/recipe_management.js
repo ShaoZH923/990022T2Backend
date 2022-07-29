@@ -29,3 +29,13 @@ exports.search_recipe_name = async(ctx, next) => {
 
     await next();
 }
+
+exports.search_recipe_ingredients = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.search_recipe_ingredients(body);
+    ctx .body = result;
+    
+    await next();
+}

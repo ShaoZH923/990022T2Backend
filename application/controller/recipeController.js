@@ -9,6 +9,15 @@ const { ingredients } = require("../model/entity/ingredients")
 class recipeController extends baseController {
     async get_recipes(content){
         let uid = content.uid;
+        let email = content.email;
+        if (uid === undefined){
+            if (email === undefined){
+                uid = 0;
+            }
+            else {
+                uid = await profile_model.get_uid(email);
+            }
+        }
 
         // 1. get all recipes
         let recipes = await recipe_model.get_recipes();
@@ -196,9 +205,24 @@ class recipeController extends baseController {
         let rid = content.rid;
         let rate = content.rate;
         await recipe_model.rate_recipe(rid, rate);
+
+        let rates = await recipe_model.get_rate(rid);
+        let n = rates.length;
+        let total_points = 0;
+        for (var i = 0; i < n; i++) {
+            rate = rates[i].rate;
+            console.log(rate);
+            total_points += rate;
+        }
+        console.log("number of rates: " + n + "\ttotal_points: " + total_points);
+        let new_rate = total_points / n;
+        console.log("new rate: " + new_rate)
+
+        await recipe_model.update_rate(rid, new_rate);
+
         let result = {
             "code": 200
-        }
+        }       
 
         return result;
     }

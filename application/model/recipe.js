@@ -51,3 +51,23 @@ exports.rate_recipe = async function(rid, rate){
         rate: rate
     }])
 }
+
+exports.get_rate = async function(rid){
+    let result = await rating.findAll({
+        where:{
+            rid: rid
+        }
+    })
+
+    return result;
+}
+
+exports.update_rate = async function(rid, new_rate){
+    await recipe.update({
+        rate: new_rate
+    }, {
+        where: {
+            rid: rid
+        }
+    })
+}

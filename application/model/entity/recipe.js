@@ -24,6 +24,11 @@ const recipe = sequelize.define('recipe', {
     picture: {
         type: Sequelize.TEXT,
         allowNull: false
+    },
+    rate: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        defaultValue: -1        
     }
 }, {
     freezeTableName: true

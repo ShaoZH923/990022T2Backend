@@ -101,6 +101,10 @@ app.use(addbookmark.routes(), addbookmark.allowedMethods());
 const commentrecipe = require('./routes/commentrecipe');
 app.use(commentrecipe.routes(), commentrecipe.allowedMethods());
 
+// create recipe
+const createrecipe = require('./routes/createrecipe');
+app.use(createrecipe.routes(), createrecipe.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

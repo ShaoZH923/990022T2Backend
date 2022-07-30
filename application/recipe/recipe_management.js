@@ -69,3 +69,13 @@ exports.commentrecipe = async(ctx, next) => {
 
     await next();
 }
+
+exports.createrecipe = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.createrecipe(body);
+    ctx.body = result;
+
+    await next();
+}

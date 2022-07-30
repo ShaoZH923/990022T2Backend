@@ -279,6 +279,23 @@ class recipeController extends baseController {
         let result = await recipe_model.view_recipe(rid);
         return result;
     }
+
+    async createrecipe(content){
+        let name = content.name;
+        let steps = content.steps;
+        let ingredients = content.ingredients;
+        let picture = content.picture;
+
+        let rec = await recipe_model.add_recipe(name, steps, ingredients, picture);
+        // console.log("================================================")
+        // console.log(rec[0]);
+        // console.log("================================================")
+        // console.log(rec[0].rid);
+        let rid = rec[0].rid;
+
+        let result = await recipe_model.view_recipe(rid);
+        return result;
+    }
 }
 
 module.exports = recipeController

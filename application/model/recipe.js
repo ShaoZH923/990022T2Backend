@@ -9,18 +9,15 @@ let recipe_db = recipe
 let comment_db = comments
 
 // user uploads new recipe
-exports.add_recipe = async function(content) {
-    let name = content.name;
-    let steps = content.steps;
-    let ingredients = content.ingredients;
-    let picture = content.picture
-
-    await recipe.bulkCreate([{
+exports.add_recipe = async function(name, steps, ingredients, picture) {
+    let result = await recipe.bulkCreate([{
         name: name,
         steps: steps,
         ingredients: ingredients,
         picture: picture
     }])
+
+    return result;
 }
 
 // get all recipes

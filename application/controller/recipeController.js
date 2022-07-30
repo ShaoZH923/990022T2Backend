@@ -3,6 +3,7 @@ const recipe_model = require("../model/recipe");
 const ingredients_model = require("../model/ingredients");
 const profile_model = require("../model/user_profile");
 const login_model = require("../model/user_accounts");
+const comment_model = require("../model/comments");
 const { recipe } = require("../model/entity/recipe");
 const { ingredients } = require("../model/entity/ingredients")
 
@@ -264,7 +265,19 @@ class recipeController extends baseController {
                 "code": 201,
                 "err-message": "Recipe already exists in bookmark"
             }
+            return result;
         }
+    }
+
+    async commentrecipe(content){
+        let uid = content.uid;
+        let rid = content.rid;
+        let comment = content.comment;
+
+        await comment_model.addcomment(uid, rid, comment);
+        
+        let result = await recipe_model.view_recipe(rid);
+        return result;
     }
 }
 

@@ -97,6 +97,10 @@ app.use(rate_recipe.routes(), rate_recipe.allowedMethods());
 const addbookmark = require('./routes/addbookmark');
 app.use(addbookmark.routes(), addbookmark.allowedMethods());
 
+// comment on recipe
+const commentrecipe = require('./routes/commentrecipe');
+app.use(commentrecipe.routes(), commentrecipe.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

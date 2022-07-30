@@ -2,7 +2,11 @@
 import { recipe } from "./entity/recipe"
 import { ingredients } from "./entity/ingredients"
 import {rating} from "./entity/rating"
+import {comments} from "./entity/comments"
 import recipeController from "../controller/recipeController";
+
+let recipe_db = recipe
+let comment_db = comments
 
 // user uploads new recipe
 exports.add_recipe = async function(content) {
@@ -28,12 +32,30 @@ exports.get_recipes = async function(){
 }
 
 exports.view_recipe = async function(rid){
-    let result = await recipe.findOne({
+    let recipe = await recipe_db.findOne({
         where: {
             rid: rid
         }
     })
-    return result.dataValues;
+
+    let comments = await comment_db.findAll({
+        where: {
+            rid: rid
+        }
+    })
+
+    let result = {
+        rid: recipe.rid,
+        name: recipe.name,
+        type: recipe.type,
+        steps: recipe.steps,
+        ingredients: recipe.ingredients,
+        picture: recipe.picture,
+        rate: recipe.rate,
+        comments: comments
+    }
+
+    return result;
 }
 
 exports.search_recipe_name = async function(name){

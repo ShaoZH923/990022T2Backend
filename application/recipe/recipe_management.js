@@ -44,7 +44,7 @@ exports.rate_recipe = async(ctx, next) => {
     let body = ctx.request.body;
 
     let controller = new Controller();
-    let result = await controller.rate_reicpe(body);
+    let result = await controller.rate_recipe(body);
     ctx.body = result;
 
     await next();

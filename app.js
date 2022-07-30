@@ -89,6 +89,10 @@ app.use(search_recipe_name.routes(), search_recipe_name.allowedMethods());
 const search_recipe_ingredients = require('./routes/search_recipe_ingredients');
 app.use(search_recipe_ingredients.routes(), search_recipe_ingredients.allowedMethods());
 
+// rate the recipe
+const rate_recipe = require('./routes/rate_recipe');
+app.use(rate_recipe.routes(), rate_recipe.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

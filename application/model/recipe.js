@@ -1,6 +1,7 @@
 // add recipes into db
 import { recipe } from "./entity/recipe"
 import { ingredients } from "./entity/ingredients"
+import {rating} from "./entity/rating"
 import recipeController from "../controller/recipeController";
 
 // user uploads new recipe
@@ -42,4 +43,11 @@ exports.search_recipe_name = async function(name){
         }
     })
     return result;
+}
+
+exports.rate_recipe = async function(rid, rate){
+    await rating.bulkCreate([{
+        rid: rid,
+        rate: rate
+    }])
 }

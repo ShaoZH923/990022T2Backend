@@ -1,19 +1,19 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../db');
 
-const ingredients = sequelize.define('ingredients', {
-    iid: {
+const rating = sequelize.define('rating', {
+    rate_num: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
         unique: true
     },
-    name: {
-        type: Sequelize.STRING,
+    rid: {
+        type: Sequelize.INTEGER,
         allowNull: false
     },
-    type: {
+    rate: {
         type: Sequelize.INTEGER,
         allowNull: false
     }
@@ -21,4 +21,4 @@ const ingredients = sequelize.define('ingredients', {
     freezeTableName: true
 });
 
-exports.ingredients = ingredients;
+exports.rating = rating;

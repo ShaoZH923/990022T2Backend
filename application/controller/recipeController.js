@@ -191,6 +191,17 @@ class recipeController extends baseController {
 
         return filtered_recipe;
     }
+
+    async rate_recipe(content){
+        let rid = content.rid;
+        let rate = content.rate;
+        await recipe_model.rate_recipe(rid, rate);
+        let result = {
+            "code": 200
+        }
+
+        return result;
+    }
 }
 
 module.exports = recipeController

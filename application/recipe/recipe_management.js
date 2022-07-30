@@ -35,7 +35,7 @@ exports.search_recipe_ingredients = async(ctx, next) => {
 
     let controller = new Controller();
     let result = await controller.search_recipe_ingredients(body);
-    ctx .body = result;
+    ctx.body = result;
     
     await next();
 }
@@ -45,6 +45,16 @@ exports.rate_recipe = async(ctx, next) => {
 
     let controller = new Controller();
     let result = await controller.rate_recipe(body);
+    ctx.body = result;
+
+    await next();
+}
+
+exports.addbookmark = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.addbookmark(body);
     ctx.body = result;
 
     await next();

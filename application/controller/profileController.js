@@ -104,11 +104,12 @@ class profileController extends baseController {
         let username = await useraccounts_model.get_username(uid);
 
         let result = {
-            uid: uid,
-            email: email,
-            username: username,
-            bookmark: profile.bookmark,
-            bannedingredients: profile.bannedingredients
+            "uid": uid,
+            "email": email,
+            "username": username,
+            "bookmark": profile.bookmark,
+            "bannedingredients": profile.bannedingredients,
+            "usertype": profile.usertype
         }
         
         return result

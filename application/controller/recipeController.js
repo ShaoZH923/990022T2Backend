@@ -173,7 +173,6 @@ class recipeController extends baseController {
             let recipe = recipes[i];
             let recipe_ingredients_str = recipe.ingredients;
             let recipe_ingredients = recipe_ingredients_str.split(',');
-            let recipe_type = recipe.type;
 
             let ingredients_included = n;
             let add = true;
@@ -225,6 +224,47 @@ class recipeController extends baseController {
         }       
 
         return result;
+    }
+
+    async addbookmark(content){
+        let uid = content.uid;
+        let rid = content.rid;
+        rid = rid.toString();
+        
+        if (uid === undefined){
+            let email = content.email;
+            uid = await profile_model.get_uid(email);
+        }
+
+        let profile = await profile_model.get_profile(uid);
+        let bookmark_str = profile.bookmark;
+        let bookmark = bookmark_str.split(',');
+
+        // make sure rid is not in the bookmark
+        let n = bookmark.length;
+        let add = true;
+        for (var i = 0; i < n; i++) {
+            if (add && bookmark[i] == rid) {
+                add = false;
+                i = n;
+            }
+        }
+        if (add) {
+            bookmark_str = bookmark_str + ',' + rid;
+            await profile_model.update_bookmark(uid, bookmark_str);
+
+            let result = {
+                "code": 200
+            }
+            return result;
+        }
+        else{
+            // recipe already exists in bookmark
+            let result = {
+                "code": 201,
+                "err-message": "Recipe already exists in bookmark"
+            }
+        }
     }
 }
 

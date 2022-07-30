@@ -82,3 +82,13 @@ exports.update_usertype = async function(uid, newtype){
         }
     })
 }
+
+exports.update_bookmark = async function(uid, bookmark){
+    await user_profile.update({
+        bookmark: bookmark
+    }, {
+        where: {
+            uid: uid
+        }
+    })
+}

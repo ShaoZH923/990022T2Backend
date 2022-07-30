@@ -93,6 +93,10 @@ app.use(search_recipe_ingredients.routes(), search_recipe_ingredients.allowedMet
 const rate_recipe = require('./routes/rate_recipe');
 app.use(rate_recipe.routes(), rate_recipe.allowedMethods());
 
+// add recipe into bookmark
+const addbookmark = require('./routes/addbookmark');
+app.use(addbookmark.routes(), addbookmark.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

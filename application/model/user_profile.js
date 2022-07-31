@@ -7,8 +7,8 @@ import { NONE } from "sequelize"
 exports.add_profile = async function(content, uid) {
     await user_profile.bulkCreate([{
         uid: uid,
-        bookmark: "{}",
-        bannedingredients: "{}"
+        bookmark: "0",
+        bannedingredients: "0"
     }])
 }
 

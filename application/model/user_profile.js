@@ -83,6 +83,15 @@ exports.update_usertype = async function(uid, newtype){
     })
 }
 
+exports.get_bookmark = async function(uid){
+    let result = await user_profile.findOne({
+        where:{
+            uid: uid
+        }
+    })
+    return result.bookmark;
+}
+
 exports.update_bookmark = async function(uid, bookmark){
     await user_profile.update({
         bookmark: bookmark

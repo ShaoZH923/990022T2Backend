@@ -97,6 +97,10 @@ app.use(rate_recipe.routes(), rate_recipe.allowedMethods());
 const addbookmark = require('./routes/addbookmark');
 app.use(addbookmark.routes(), addbookmark.allowedMethods());
 
+// remove recipe from bookmark
+const removebookmark = require('./routes/removebookmark');
+app.use(removebookmark.routes(), removebookmark.allowedMethods());
+
 // comment on recipe
 const commentrecipe = require('./routes/commentrecipe');
 app.use(commentrecipe.routes(), commentrecipe.allowedMethods());

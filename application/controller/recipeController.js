@@ -296,6 +296,24 @@ class recipeController extends baseController {
         let result = await recipe_model.view_recipe(rid);
         return result;
     }
+
+    async removebookmark(content){
+        let uid = content.uid;
+        let rid = content.rid;
+        rid = "" + rid;
+
+        let current_bookmark = await profile_model.get_bookmark(uid);
+        current_bookmark = current_bookmark.split(',');
+        let new_bookmark = "0";
+        let n = current_bookmark.length;
+        for (var i = 1; i < n; i++) {
+            if (current_bookmark[i] !== rid){
+                new_bookmark = new_bookmark + ',' + current_bookmark[i];
+            }
+        }
+        await profile_model.update_bookmark(uid, new_bookmark);
+        return await profile_model.get_profile(uid);
+    }
 }
 
 module.exports = recipeController

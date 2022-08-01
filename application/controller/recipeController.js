@@ -335,6 +335,20 @@ class recipeController extends baseController {
             }
         }
 
+        let usertype = await profile_model.get_usertype(uid);
+        let banned_id_1 = -1;
+        let banned_id_2 = -1;
+        let banned_id_3 = -1;
+        let banned_type_1 = -1;
+        let banned_type_2 = -1;
+        if (usertype === 1){
+            banned_id_1 = 2;
+        }
+        if (usertype === 2){
+            banned_type_1 = 1;
+            banned_type_2 = 3;
+        }
+
         let bannedingredients = await profile_model.get_bannedingredients(uid);
         // console.log("bannedingredients", bannedingredients.dataValues.bannedingredients);
         bannedingredients = bannedingredients.dataValues.bannedingredients;
@@ -357,6 +371,15 @@ class recipeController extends baseController {
                         if (rec_ingredients[k] === bannedingredients[j]){
                             add = false;
                             j = n;
+                            k = r_n;
+                        }
+                        if (rec_ingredients[k] === banned_id_1 || rec_ingredients[k] === banned_id_2 || rec_ingredients[k] === banned_id_3){
+                            add = false;
+                            k = r_n;
+                        }
+                        let ingred_type = await ingredients_model.get_ingredients_type(rec_ingredients[k]);
+                        if (ingred_type === banned_type_1 || ingred_type === banned_type_2) {
+                            add = false;
                             k = r_n;
                         }
                     }

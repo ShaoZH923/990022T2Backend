@@ -17,6 +17,10 @@ const comments = sequelize.define('comments', {
         type: Sequelize.INTEGER,
         allowNull: false
     }, 
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     comment: {
         type: Sequelize.INTEGER,
         allowNull: false

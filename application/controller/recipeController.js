@@ -397,6 +397,8 @@ class recipeController extends baseController {
                 }
             }
             if (add) {
+                recipe.dataValues.comments = await comment_model.searchcomments(recipe.rid);
+                // console.log("recipe: ", recipe)
                 selected_recipes[count] = recipe;
                 count += 1;
             }

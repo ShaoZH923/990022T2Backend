@@ -117,6 +117,14 @@ app.use(createrecipe.routes(), createrecipe.allowedMethods());
 const getUserrecipe = require('./routes/getUserrecipe');
 app.use(getUserrecipe.routes(), getUserrecipe.allowedMethods());
 
+// edit recipe
+const editrecipe = require('./routes/editrecipe');
+app.use(editrecipe.routes(), editrecipe.allowedMethods());
+
+// delete recipe
+const deleterecipe = require('./routes/deleterecipe');
+app.use(deleterecipe.routes(), deleterecipe.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

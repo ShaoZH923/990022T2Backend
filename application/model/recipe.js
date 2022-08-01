@@ -9,8 +9,9 @@ let recipe_db = recipe
 let comment_db = comments
 
 // user uploads new recipe
-exports.add_recipe = async function(name, steps, ingredients, picture) {
+exports.add_recipe = async function(uid, name, steps, ingredients, picture) {
     let result = await recipe.bulkCreate([{
+        uid: uid,
         name: name,
         steps: steps,
         ingredients: ingredients,
@@ -39,10 +40,11 @@ exports.view_recipe = async function(rid){
         where: {
             rid: rid
         }
-    })
+    })    
 
     let result = {
         rid: recipe.rid,
+        uid: recipe.uid,
         name: recipe.name,
         type: recipe.type,
         steps: recipe.steps,
@@ -108,4 +110,34 @@ exports.getUserrecipe = async function(uid){
         }
     })
     return result;
+}
+
+exports.remove_recipe = async function(rid){
+    await recipe.destroy({
+        where: {
+            rid: rid
+        }
+    })
+}
+
+
+exports.remove_recipe_ratings = async function(rid) {
+    await rating.destroy({
+        where: {
+            rid: rid
+        }
+    })    
+}
+
+exports.editrecipe = async function(rid, name, steps, ingredients, picture) {
+    await recipe.update({
+        name: name,
+        steps: steps,
+        ingredients: ingredients,
+        picture: picture
+    }, {
+        where: {
+            rid: rid
+        }
+    })
 }

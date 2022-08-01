@@ -281,11 +281,12 @@ class recipeController extends baseController {
 
     async createrecipe(content){
         let name = content.name;
+        let uid = content.uid;
         let steps = content.steps;
         let ingredients = content.ingredients;
         let picture = content.picture;
 
-        let rec = await recipe_model.add_recipe(name, steps, ingredients, picture);
+        let rec = await recipe_model.add_recipe(uid, name, steps, ingredients, picture);
         // console.log("================================================")
         // console.log(rec[0]);
         // console.log("================================================")
@@ -415,6 +416,70 @@ class recipeController extends baseController {
 
         let result = await recipe_model.getUserrecipe(uid);
         return result;
+    }
+
+    async deleterecipe(content){
+        let rid = content.rid;
+        let uid = content.uid;
+        if (uid === undefined) {
+            let email = content.email;
+            uid = await login_model.get_uid(email);
+        }
+
+        // check if rid and uid matches
+        let recipe = await recipe_model.view_recipe(rid);
+        console.log(recipe)
+        if (recipe.uid !== uid) {
+            let result = {
+                "code": 201,
+                "err-message": "Recipe does not belong to the user"
+            }
+            return result;
+        }
+
+        // remove recipe
+        recipe_model.remove_recipe(rid);
+
+        // remove ratings
+        recipe_model.remove_recipe_ratings(rid);
+
+        // remove comments
+        comment_model.remove_recipe_comments(rid);
+
+        let result = {
+            "code": 200
+        }
+        return result;
+    }
+
+    async editrecipe(content){
+        console.log(content)
+        let rid = content.rid;
+        let old_recipe = await recipe_model.view_recipe(rid)
+
+        let name = content.name;
+        if (name === undefined) {
+            name = old_recipe.name;
+        }
+
+        let steps = content.steps;
+        if (steps === undefined) {
+            steps = old_recipe.steps;
+        }
+
+        let ingredients = content.ingredients;
+        if (ingredients === undefined) {
+            ingredients = old_recipe.ingredients;
+        }
+
+        let picture = content.picture;
+        if (picture === undefined) {
+            picture = old_recipe.picture;
+        }
+
+        await recipe_model.editrecipe(rid, name, steps, ingredients, picture);
+
+        return await recipe_model.view_recipe(rid);
     }
 }
 

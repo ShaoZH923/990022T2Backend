@@ -109,3 +109,23 @@ exports.getUserrecipe = async(ctx, next) => {
 
     await next();
 }
+
+exports.deleterecipe = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.deleterecipe(body);
+    ctx.body = result;
+
+    await next();
+}
+
+exports.editrecipe = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.editrecipe(body);
+    ctx.body = result;
+
+    await next();
+}

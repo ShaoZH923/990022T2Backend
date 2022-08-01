@@ -19,3 +19,11 @@ exports.searchcomments = async function(rid) {
     })
     return result
 }
+
+exports.remove_recipe_comments = async function(rid) {
+    comments.destroy({
+        where: {
+            rid: rid
+        }
+    })
+}

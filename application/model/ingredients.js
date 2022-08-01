@@ -15,10 +15,12 @@ exports.get_iid = async function(name){
 }
 
 exports.get_ingredients_type = async function(iid){
+    // console.log("iid = ", iid);
     let result = await ingredients.findOne({
-        wherer: {
+        where: {
             iid: iid
         }
     })
+    // console.log(result.dataValues);
     return result.type;
 }

@@ -359,10 +359,15 @@ class recipeController extends baseController {
         let selected_recipes = new Array();
         let l = recipes.length;
         let count = 0;
+
+        // console.log("================================ bannedingredients: ", bannedingredients)
+        // console.log("================================ usertype: ", usertype);
+
         for (var i = 0; i < l; i++) {
             let recipe = recipes[i];
             let rec_ingredients = recipe.ingredients;
             rec_ingredients = rec_ingredients.split(',');
+            // console.log("==================== rec_ingredients: ", rec_ingredients);
             let r_n = rec_ingredients.length;
             let add = true;
             for (var j = 0; j < n; j++) {
@@ -375,11 +380,15 @@ class recipeController extends baseController {
                         }
                         if (rec_ingredients[k] === banned_id_1 || rec_ingredients[k] === banned_id_2 || rec_ingredients[k] === banned_id_3){
                             add = false;
+                            j = n;
                             k = r_n;
                         }
+                        // console.log("================= rec_ingredients[k]: ", rec_ingredients[k]);
                         let ingred_type = await ingredients_model.get_ingredients_type(rec_ingredients[k]);
+                        // console.log("================= ingred_type:", ingred_type);
                         if (ingred_type === banned_type_1 || ingred_type === banned_type_2) {
                             add = false;
+                            j = n;
                             k = r_n;
                         }
                     }

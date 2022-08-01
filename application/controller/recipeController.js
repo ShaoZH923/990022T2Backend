@@ -405,6 +405,17 @@ class recipeController extends baseController {
 
         return selected_recipes;
     }
+
+    async getUserrecipe(content) {
+        let uid = content.uid;
+        if (uid === undefined) {
+            let email = content.email;
+            uid = await login_model.get_uid(email);
+        }
+
+        let result = await recipe_model.getUserrecipe(uid);
+        return result;
+    }
 }
 
 module.exports = recipeController

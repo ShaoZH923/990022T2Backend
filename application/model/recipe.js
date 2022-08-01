@@ -100,3 +100,12 @@ exports.popularrecipe = async function(){
     })
     return result;
 }
+
+exports.getUserrecipe = async function(uid){
+    let result = await recipe.findAll({
+        where:{
+            uid: uid
+        }
+    })
+    return result;
+}

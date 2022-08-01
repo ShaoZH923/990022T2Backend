@@ -13,6 +13,10 @@ const recipe = sequelize.define('recipe', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    uid: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     steps: {
         type: Sequelize.TEXT,
         allowNull: false

@@ -113,6 +113,10 @@ app.use(commentrecipe.routes(), commentrecipe.allowedMethods());
 const createrecipe = require('./routes/createrecipe');
 app.use(createrecipe.routes(), createrecipe.allowedMethods());
 
+// get user recipe
+const getUserrecipe = require('./routes/getUserrecipe');
+app.use(getUserrecipe.routes(), getUserrecipe.allowedMethods());
+
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)

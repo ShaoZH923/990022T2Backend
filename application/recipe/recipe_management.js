@@ -99,3 +99,13 @@ exports.popularrecipe = async(ctx, next) => {
 
     await next();
 }
+
+exports.getUserrecipe = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.getUserrecipe(body);
+    ctx.body = result;
+
+    await next();
+}

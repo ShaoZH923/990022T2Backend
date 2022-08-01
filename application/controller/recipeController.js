@@ -391,6 +391,7 @@ class recipeController extends baseController {
             let recipe = recipes[i];
             let rec_ingredients = recipe.ingredients;
             rec_ingredients = rec_ingredients.split(',');
+            // console.log("=======recipe: ", recipe)
             // console.log("==================== rec_ingredients: ", rec_ingredients);
             let r_n = rec_ingredients.length;
             let add = true;

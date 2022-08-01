@@ -21,6 +21,8 @@ exports.get_ingredients_type = async function(iid){
             iid: iid
         }
     })
+    // console.log("================ dataValues =============")
     // console.log(result.dataValues);
-    return result.type;
+    // console.log(result.dataValues.type);
+    return result.dataValues.type;
 }

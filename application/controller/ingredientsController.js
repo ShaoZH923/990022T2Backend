@@ -25,12 +25,27 @@ class ingredientsController extends baseController {
         let n = ingredients_list.length
         let result = []
         for (var i = 0; i < n; i++){
-            let iid_str = ingredients_list[i].dataValues.iid.toString();
-            if (banned_ingredients_array.has(iid_str)){
-                // do nothing
+            let add = true;
+            // let iid_str = ingredients_list[i].dataValues.iid.toString();
+            // if (banned_ingredients_array.has(iid_str)){
+            //     // do nothing
+            // }
+            // else {
+            //     result.push(ingredients_list[i].dataValues)
+            // }
+            let ingredient = ingredients_list[i].dataValues;
+            if (ingredient.type === banned_type_1 || ingredient.type === banned_type_2){
+                add = false;
             }
-            else {
-                result.push(ingredients_list[i].dataValues)
+            if (ingredient.iid === banned_id_1 || ingredient.iid === banned_id_2 || ingredient.iid === banned_id_3){
+                add = false;
+            }
+            let iid_str = "" + ingredient.iid
+            if (banned_ingredients_array.has(iid_str)){
+                add = false;
+            }
+            if (add) {
+                result.push(ingredient)
             }
         }
 

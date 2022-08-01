@@ -9,46 +9,48 @@ const { ingredients } = require("../model/entity/ingredients")
 
 class recipeController extends baseController {
     async get_recipes(content){
-        let uid = content.uid;
-        let email = content.email;
-        if (uid === undefined){
-            if (email === undefined){
-                uid = 0;
-            }
-            else {
-                uid = await profile_model.get_uid(email);
-            }
-        }
+        // let uid = content.uid;
+        // let email = content.email;
+        // if (uid === undefined){
+        //     if (email === undefined){
+        //         uid = 0;
+        //     }
+        //     else {
+        //         uid = await profile_model.get_uid(email);
+        //     }
+        // }
 
-        // 1. get all recipes
-        let recipes = await recipe_model.get_recipes();
+        // // 1. get all recipes
+        // let recipes = await recipe_model.get_recipes();
         
-        // 2. get user profile from userprofile
-        //      2.1 get the ingredents that user does not eat
-        // get uid's  banned_ingredents list
-        let banned_ingredients = await profile_model.get_bannedingredients(uid);
-        banned_ingredients = banned_ingredients.dataValues.bannedingredients;
-        let banned_ingredients_arr = banned_ingredients.split(',');
-        let ban_length = banned_ingredients_arr.length;
+        // // 2. get user profile from userprofile
+        // //      2.1 get the ingredents that user does not eat
+        // // get uid's  banned_ingredents list
+        // let banned_ingredients = await profile_model.get_bannedingredients(uid);
+        // banned_ingredients = banned_ingredients.dataValues.bannedingredients;
+        // let banned_ingredients_arr = banned_ingredients.split(',');
+        // let ban_length = banned_ingredients_arr.length;
 
-        // 3. filter out the recipe with specifc ingredients
-        let n = recipes.length;
-        let recipes_arr = [];
-        for (var i = 0; i < n; i++){
-            var data = recipes[i].dataValues;
-            var ingredients = data.ingredients.split(',');
-            var rec_ing = ingredients.length;
-            if (ban_length + rec_ing === (banned_ingredients_arr.concat(ingredients)).length)
-            {
-                data.comments = await comment_model.searchcomments(data.rid);
-                recipes_arr.push(data);
-            }
-        }
+        // // 3. filter out the recipe with specifc ingredients
+        // let n = recipes.length;
+        // let recipes_arr = [];
+        // for (var i = 0; i < n; i++){
+        //     var data = recipes[i].dataValues;
+        //     var ingredients = data.ingredients.split(',');
+        //     var rec_ing = ingredients.length;
+        //     if (ban_length + rec_ing === (banned_ingredients_arr.concat(ingredients)).length)
+        //     {
+        //         data.comments = await comment_model.searchcomments(data.rid);
+        //         recipes_arr.push(data);
+        //     }
+        // }
 
-        return ({
-            "code": 200,
-            "recipes": recipes_arr
-        });
+        // return ({
+        //     "code": 200,
+        //     "recipes": recipes_arr
+        // });
+        content.name = "";
+        return await this.search_recipe_name(content);
     }
 
     async view_recipe(content){
@@ -66,11 +68,19 @@ class recipeController extends baseController {
         let uid = content.uid;
         let email = content.email;
         if (uid === undefined) {
-            uid = await login_model.get_uid(email);
-            uid = uid.uid;
+            if (email === undefined) {
+                uid = 0;
+            }
+            else {
+                uid = await login_model.get_uid(email);
+                uid = uid.uid;
+            }
         }
         console.log("uid:", uid)
         let name = content.name;
+        if (name === undefined) {
+            name = "";
+        }
         name = name.toLowerCase();
         // filter recipe's ingredents based on usertype
         let usertype = await profile_model.get_usertype(uid);
@@ -81,6 +91,8 @@ class recipeController extends baseController {
         let banned_type_2 = -1;
         if (usertype === 1){
             banned_id_1 = 2;
+            banned_id_2 = 34;
+            banned_id_3 = 35;
         }
         if (usertype === 2){
             banned_type_1 = 1;
@@ -153,6 +165,8 @@ class recipeController extends baseController {
         let banned_type_2 = -1;
         if (usertype === 1){
             banned_id_1 = 2;
+            banned_id_2 = 34;
+            banned_id_3 = 35;
         }
         if (usertype === 2){
             banned_type_1 = 1;
@@ -347,6 +361,8 @@ class recipeController extends baseController {
         let banned_type_2 = -1;
         if (usertype === 1){
             banned_id_1 = 2;
+            banned_id_2 = 34;
+            banned_id_3 = 35;
         }
         if (usertype === 2){
             banned_type_1 = 1;

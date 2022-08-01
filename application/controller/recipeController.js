@@ -232,9 +232,10 @@ class recipeController extends baseController {
         let rid = content.rid;
         rid = rid.toString();
         
-        if (uid === undefined){
+        if (uid === undefined) {
             let email = content.email;
-            uid = await profile_model.get_uid(email);
+            uid = await login_model.get_uid(email);
+            uid = uid.uid;
         }
 
         let profile = await profile_model.get_profile(uid);
@@ -254,9 +255,7 @@ class recipeController extends baseController {
             bookmark_str = bookmark_str + ',' + rid;
             await profile_model.update_bookmark(uid, bookmark_str);
 
-            let result = {
-                "code": 200
-            }
+            let result = await profile_model.get_profile(uid);
             return result;
         }
         else{
@@ -300,6 +299,13 @@ class recipeController extends baseController {
     async removebookmark(content){
         let uid = content.uid;
         let rid = content.rid;
+        
+        if (uid === undefined) {
+            let email = content.email
+            uid = await login_model.get_uid(email);
+            uid = uid.uid;
+        }
+
         rid = "" + rid;
 
         let current_bookmark = await profile_model.get_bookmark(uid);

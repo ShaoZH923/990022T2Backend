@@ -90,3 +90,13 @@ exports.update_rate = async function(rid, new_rate){
         }
     })
 }
+
+exports.popularrecipe = async function(){
+    let result = await recipe.findAll({
+        order: [
+            ['rate', 'desc'],
+            ['rid', 'asc']
+        ]
+    })
+    return result;
+}

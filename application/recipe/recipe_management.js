@@ -89,3 +89,13 @@ exports.removebookmark = async(ctx, next) => {
 
     await next();
 }
+
+exports.popularrecipe = async(ctx, next) => {
+    let body = ctx.request.body;
+
+    let controller = new Controller();
+    let result = await controller.popularrecipe(body);
+    ctx.body = result;
+
+    await next();
+}

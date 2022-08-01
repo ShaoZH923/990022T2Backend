@@ -320,6 +320,59 @@ class recipeController extends baseController {
         await profile_model.update_bookmark(uid, new_bookmark);
         return await profile_model.get_profile(uid);
     }
+
+    async popularrecipe(content){
+        let uid = content.uid;
+
+        if (uid === undefined) {
+            let email = content.email;
+            if (email === undefined) {
+                uid = 0;
+            }
+            else {
+                uid = await login_model.get_uid(email);
+                uid = uid.uid;
+            }
+        }
+
+        let bannedingredients = await profile_model.get_bannedingredients(uid);
+        // console.log("bannedingredients", bannedingredients.dataValues.bannedingredients);
+        bannedingredients = bannedingredients.dataValues.bannedingredients;
+        bannedingredients = bannedingredients.split(',');
+        let n = bannedingredients.length;
+
+        let recipes = await recipe_model.popularrecipe();
+        let selected_recipes = new Array();
+        let l = recipes.length;
+        let count = 0;
+        for (var i = 0; i < l; i++) {
+            let recipe = recipes[i];
+            let rec_ingredients = recipe.ingredients;
+            rec_ingredients = rec_ingredients.split(',');
+            let r_n = rec_ingredients.length;
+            let add = true;
+            for (var j = 0; j < n; j++) {
+                if (add) {
+                    for (var k = 0; k < r_n; k++) {
+                        if (rec_ingredients[k] === bannedingredients[j]){
+                            add = false;
+                            j = n;
+                            k = r_n;
+                        }
+                    }
+                }
+            }
+            if (add) {
+                selected_recipes[count] = recipe;
+                count += 1;
+            }
+            if (count === 3) {
+                i = l;
+            }
+        }
+
+        return selected_recipes;
+    }
 }
 
 module.exports = recipeController

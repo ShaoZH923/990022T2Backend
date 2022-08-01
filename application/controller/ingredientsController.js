@@ -6,12 +6,34 @@ const { ingredients_db } = require("../model/entity/ingredients");
 
 class ingredientsController extends baseController {
     async get_ingredients(content) {
-        let email = content.email
-        let uid = 0
-        if (email !== undefined){
-            let user_info = await account_model.get_userinfo(email)
-            // console.log("user_info: ", user_info)
-            uid = user_info.uid
+        let email = content.email;
+        let uid = content.uid;
+        if (uid === undefined) {
+            if (email === undefined) {
+                uid = 0;
+            }
+            else {
+                uid = await account_model.get_uid(email);
+                uid = uid.uid;
+            }
+        }
+
+        console.log("========= uid: ", uid)
+
+        let usertype = await profile_model.get_usertype(uid);
+        let banned_id_1 = -1;
+        let banned_id_2 = -1;
+        let banned_id_3 = -1;
+        let banned_type_1 = -1;
+        let banned_type_2 = -1;
+        if (usertype === 1){
+            banned_id_1 = 2;
+            banned_id_2 = 34;
+            banned_id_3 = 35;
+        }
+        if (usertype === 2){
+            banned_type_1 = 1;
+            banned_type_2 = 3;
         }
 
         // get uid's  banned_ingredents list

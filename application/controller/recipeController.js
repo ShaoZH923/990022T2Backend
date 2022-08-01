@@ -40,6 +40,7 @@ class recipeController extends baseController {
             var rec_ing = ingredients.length;
             if (ban_length + rec_ing === (banned_ingredients_arr.concat(ingredients)).length)
             {
+                data.comments = await comment_model.searchcomments(data.rid);
                 recipes_arr.push(data);
             }
         }

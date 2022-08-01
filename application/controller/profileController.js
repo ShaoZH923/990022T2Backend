@@ -11,6 +11,7 @@ class profileController extends baseController {
         let bannedingredients = content.bannedingredients
         
         // convert name of bannedingredients to ingredent id (iid)
+        // console.log(bannedingredients)
         let ingredients_name_added = bannedingredients.split(',')    // array
 
         

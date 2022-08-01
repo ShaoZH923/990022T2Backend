@@ -127,6 +127,7 @@ class recipeController extends baseController {
                     }
                 }
                 if (add) {
+                    recipe.dataValues.comments = await comment_model.searchcomments(recipe.rid);
                     filtered_recipe[count] = recipe;
                     count += 1;
                 }
@@ -193,7 +194,8 @@ class recipeController extends baseController {
                 }
 
                 if (add && ingredients_included === 0) {
-                    filtered_recipe[count] = recipe;
+                    recipe.dataValues.comments = await comment_model.searchcomments(recipe.rid);
+                    filtered_recipe[count] = recipe;                    
                     count += 1;
                 }
             }

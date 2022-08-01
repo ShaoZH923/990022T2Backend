@@ -18,7 +18,7 @@ class ingredientsController extends baseController {
             }
         }
 
-        console.log("========= uid: ", uid)
+        // console.log("========= uid: ", uid)
 
         let usertype = await profile_model.get_usertype(uid);
         let banned_id_1 = -1;

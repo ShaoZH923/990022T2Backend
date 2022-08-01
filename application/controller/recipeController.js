@@ -50,7 +50,11 @@ class recipeController extends baseController {
         //     "recipes": recipes_arr
         // });
         content.name = "";
-        return await this.search_recipe_name(content);
+        let result = {
+                "code": 200,
+                "recipes": await this.search_recipe_name(content)
+            }
+        return result
     }
 
     async view_recipe(content){

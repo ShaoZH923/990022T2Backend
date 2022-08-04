@@ -26,3 +26,12 @@ exports.get_ingredients_type = async function(iid){
     // console.log(result.dataValues.type);
     return result.dataValues.type;
 }
+
+exports.get_ingredient_name = async function(iid){
+    let result = await ingredients.findOne({
+        where: {
+            iid: iid
+        }
+    })
+    return result.dataValues.name;
+}

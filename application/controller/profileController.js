@@ -104,12 +104,24 @@ class profileController extends baseController {
         
         let username = await useraccounts_model.get_username(uid);
 
+        let bannedingredients = profile.bannedingredients;
+        bannedingredients = bannedingredients.split(',');
+        let n = bannedingredients.length;
+        let object_bannedingredients = [];
+
+        for (let i = 1; i < n; i++) {
+            // console.log(bannedingredients[i])
+            let iid = parseInt(bannedingredients[i])
+            object_bannedingredients[i - 1] = await ingredients_model.get_ingredient_name(iid)
+        }
+
+
         let result = {
             "uid": uid,
             "email": email,
             "username": username,
             "bookmark": profile.bookmark,
-            "bannedingredients": profile.bannedingredients,
+            "bannedingredients": object_bannedingredients,
             "usertype": profile.usertype
         }
         

@@ -6,13 +6,13 @@ let request = require("supertest");
 let assert = require("assert");
 
 const correct_combo_1 = {
-    email: 'sample_explorer1@sampleemail.com',
-    password: 'samplepassword'
+    email: 'unittest@unittest.com',
+    password: 'unittest'
 }
 
 const correct_combo_2 = {
-    email: 'sample_contributor1@sampleemail.com',
-    password: 'samplepassword_1'
+    email: 'anonymous1@gmail.com',
+    password: '123456789'
 }
 
 const correct_combo_3 = {

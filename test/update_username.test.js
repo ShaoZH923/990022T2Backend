@@ -21,8 +21,8 @@ const correct_combo_2 = {
 const corr_username_2 = "originalUsername"
 
 const wrong_email = {
-    "email": "z530091@ad.unsw.edu.au",
-    "newusername": "doesntmatter"
+    "email": "unittest@unitttttest.com",
+    "newusername": "unittest"
 }
 
 // test 1, change username successfully

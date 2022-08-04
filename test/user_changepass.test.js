@@ -18,27 +18,27 @@ const incorrect_email2 = {
 }
 
 const incorrect_oldpassword1 = {
-    email: "z5300917@ad.unsw.edu.au",
+    email: "unittest@unittest.com",
     oldpassword: "wrongpass1",
     newpassword: "whatever"
 }
 
 const incorrect_oldpassword2 = {
-    email: "z5300917@ad.unsw.edu.au",
+    email: "unittest@unittest.com",
     oldpassword: "wrongpass2",
     newpassword: "whatever"
 }
 
 const correct_combo_1 = {
-    email: "z5300917@ad.unsw.edu.au",
-    oldpassword: "123456789",
+    email: "unittest@unittest.com",
+    oldpassword: "unittest",
     newpassword: "changedpass"
 }
 
 const correct_combo_2 = {
-    email: "z5300917@ad.unsw.edu.au",
+    email: "unittest@unittest.com",
     oldpassword: "changedpass",
-    newpassword: "123456789"
+    newpassword: "unittest"
 }
 
 // test 1, change password using correct combo

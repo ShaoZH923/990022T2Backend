@@ -160,7 +160,7 @@ class accountController extends baseController {
         let newusername = content.newusername;
 
         // check if email exists
-        let list = await userAccounts.get_uid;
+        let list = await userAccounts.get_uid(email);
         if (list === null) {
             let result = {
                 "code": 201,

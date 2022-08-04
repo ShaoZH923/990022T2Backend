@@ -12,12 +12,12 @@ const correct_combo_1 = {
 
 const correct_combo_2 = {
     email: 'anonymous1@gmail.com',
-    password: '123456789'
+    password: '12345678'
 }
 
 const correct_combo_3 = {
-    email: 'z5300917@ad.unsw.edu.au',
-    password: '123456789'
+    email: 'sample_explorer1@sampleemail.com',
+    password: 'samplepassword'
 }
 
 const wrong_password_1 = {
@@ -31,7 +31,7 @@ const wrong_password_2 = {
 }
 
 const wrong_password_3 = {
-    email: 'z5300917@ad.unsw.edu.au',
+    email: 'unittest@unittest.com',
     password: 'wrongpassword_3'
 }
 

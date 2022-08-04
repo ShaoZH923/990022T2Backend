@@ -5,7 +5,7 @@ let request = require("supertest")
 let assert = require("assert");
 
 const using_email = {
-    email: "z5300917@ad.unsw.edu.au"
+    email: "demo@demo.com"
 }
 
 const using_uid = {
@@ -13,7 +13,7 @@ const using_uid = {
 }
 
 const wrong_email = {
-    email: "z530091@ad.unsw.edu.au"
+    email: "z5301@ad.unsw.edu.au"
 }
 
 // test 1, aquire user profile using email
@@ -29,16 +29,10 @@ it('aquire user profile using email', function(done){
                 assert.equal(res.body.uid, 4)
             })
             .expect(function(res) {
-                assert.equal(res.body.email, "z5300917@ad.unsw.edu.au")
+                assert.equal(res.body.email, "demo@demo.com")
             })
             .expect(function(res) {
-                assert.equal(res.body.username, "zshaochanged")
-            })
-            .expect(function(res) {
-                assert.equal(res.body.bookmark, "0")
-            })
-            .expect(function(res) {
-                assert.equal(res.body.bannedingredients, "1,2")
+                assert.equal(res.body.username, "demoaccount")
             })
             .end(done)
     }, 50, 'funky')
@@ -57,16 +51,10 @@ it('aquire user profile using uid', function(done){
                 assert.equal(res.body.uid, 4)
             })
             .expect(function(res) {
-                assert.equal(res.body.email, "z5300917@ad.unsw.edu.au")
+                assert.equal(res.body.email, "demo@demo.com")
             })
             .expect(function(res) {
-                assert.equal(res.body.username, "zshaochanged")
-            })
-            .expect(function(res) {
-                assert.equal(res.body.bookmark, "0")
-            })
-            .expect(function(res) {
-                assert.equal(res.body.bannedingredients, "1,2")
+                assert.equal(res.body.username, "demoaccount")
             })
             .end(done)
     }, 100, 'funky')
